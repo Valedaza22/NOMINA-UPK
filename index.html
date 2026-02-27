@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Informe de Nómina – UP KEEP SERVICES SAS | 26 Febrero 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'Inter',Arial,sans-serif;background:#f0f4f8;color:#1a2634;font-size:13px;}
+  .page{max-width:1150px;margin:0 auto;padding:32px 24px;}
+
+  .header{background:linear-gradient(135deg,#0f2d4a 0%,#1a4d7a 60%,#2165a8 100%);border-radius:16px;padding:32px 40px;color:white;margin-bottom:28px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 8px 32px rgba(15,45,74,0.25);}
+  .header-logo-area{display:flex;align-items:center;gap:20px;}
+  .header-logo{width:72px;height:72px;border-radius:10px;object-fit:cover;border:2px solid rgba(255,255,255,0.3);flex-shrink:0;}
+  .header-left h1{font-size:24px;font-weight:800;letter-spacing:-0.5px;}
+  .header-left h2{font-size:13px;font-weight:400;opacity:0.8;margin-top:3px;}
+  .header-left .nit{font-size:11.5px;opacity:0.6;margin-top:2px;}
+  .header-left .periodo{margin-top:10px;background:rgba(255,255,255,0.15);border-radius:8px;padding:7px 14px;font-size:12px;display:inline-block;}
+  .header-right{text-align:right;flex-shrink:0;}
+  .header-right .fecha-label{font-size:11px;opacity:0.65;text-transform:uppercase;letter-spacing:1px;}
+  .header-right .fecha{font-size:18px;font-weight:600;margin-top:4px;}
+  .badge-quincena{margin-top:10px;background:#f59e0b;color:#1a2634;border-radius:20px;padding:5px 14px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;display:inline-block;}
+
+  .aviso-especial{background:linear-gradient(135deg,#fef3c7,#fde68a);border-left:5px solid #d97706;border-radius:10px;padding:16px 20px;margin-bottom:28px;display:flex;align-items:flex-start;gap:14px;box-shadow:0 2px 8px rgba(217,119,6,0.15);}
+  .aviso-especial .icon{font-size:24px;margin-top:2px;}
+  .aviso-especial h3{font-size:14px;font-weight:700;color:#92400e;margin-bottom:4px;}
+  .aviso-especial p{font-size:12.5px;color:#78350f;line-height:1.6;}
+
+  .kpi-grid{display:grid;gap:16px;margin-bottom:28px;}
+  .kpi-grid-4{grid-template-columns:repeat(4,1fr);}
+  .kpi-grid-5{grid-template-columns:repeat(5,1fr);}
+  .kpi-card{background:white;border-radius:12px;padding:20px 18px;box-shadow:0 2px 8px rgba(0,0,0,0.06);border-top:4px solid;}
+  .kpi-card.blue{border-color:#2165a8;}.kpi-card.green{border-color:#059669;}.kpi-card.amber{border-color:#d97706;}.kpi-card.red{border-color:#dc2626;}.kpi-card.purple{border-color:#7c3aed;}
+  .kpi-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:#64748b;margin-bottom:6px;}
+  .kpi-value{font-size:22px;font-weight:700;color:#0f2d4a;line-height:1;}
+  .kpi-sub{font-size:11px;color:#94a3b8;margin-top:4px;}
+
+  .section-title{font-size:16px;font-weight:700;color:#0f2d4a;margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+  .section-title::after{content:'';flex:1;height:2px;background:linear-gradient(90deg,#2165a8,transparent);border-radius:2px;}
+
+  .resumen-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:28px;}
+  .resumen-card{background:white;border-radius:12px;padding:22px;box-shadow:0 2px 8px rgba(0,0,0,0.06);}
+  .resumen-card h3{font-size:13px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:14px;}
+  .fin-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid #f1f5f9;font-size:12.5px;}
+  .fin-row:last-child{border-bottom:none;}
+  .fin-row .label{color:#475569;}
+  .fin-row .amount{font-weight:600;color:#0f2d4a;}
+  .fin-row.total{margin-top:6px;padding-top:12px;border-top:2px solid #0f2d4a;border-bottom:none;font-size:14px;}
+  .fin-row.total .label{font-weight:700;color:#0f2d4a;}
+  .fin-row.total .amount{color:#059669;font-size:16px;font-weight:700;}
+
+  .he-highlight{background:linear-gradient(135deg,#eff6ff,#dbeafe);border:1px solid #bfdbfe;border-radius:12px;padding:20px 22px;margin-bottom:28px;}
+  .he-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:14px;}
+  .he-item{background:white;border-radius:10px;padding:14px 16px;text-align:center;box-shadow:0 1px 4px rgba(0,0,0,0.06);}
+  .he-item .he-val{font-size:18px;font-weight:700;color:#1d4ed8;}
+  .he-item .he-lab{font-size:11px;color:#64748b;margin-top:4px;line-height:1.4;}
+
+  /* CC CHART */
+  .cc-section{background:white;border-radius:12px;padding:24px;box-shadow:0 2px 8px rgba(0,0,0,0.06);margin-bottom:28px;}
+  .cc-note{font-size:11.5px;color:#1d4ed8;background:#eff6ff;border-radius:8px;padding:10px 14px;margin-bottom:18px;border-left:3px solid #2165a8;}
+  .cc-bar-row{display:flex;align-items:center;gap:12px;margin-bottom:12px;}
+  .cc-bar-label{width:200px;font-size:12px;font-weight:600;color:#334155;flex-shrink:0;display:flex;align-items:center;gap:6px;}
+  .cc-bar-track{flex:1;background:#f1f5f9;border-radius:20px;height:26px;position:relative;overflow:hidden;}
+  .cc-bar-fill{height:100%;border-radius:20px;transition:width 0.7s ease;display:flex;align-items:center;padding:0 10px;min-width:20px;}
+  .cc-bar-val{font-size:11px;font-weight:700;color:white;white-space:nowrap;}
+  .cc-bar-pct{width:52px;font-size:12px;font-weight:700;color:#64748b;text-align:right;flex-shrink:0;}
+  .cc-bar-count{width:50px;font-size:11px;color:#94a3b8;text-align:center;flex-shrink:0;}
+  .cc-bar-emp{width:110px;font-size:10.5px;color:#64748b;flex-shrink:0;text-align:right;}
+  .cc-legend{display:flex;gap:14px;flex-wrap:wrap;margin-top:16px;padding-top:14px;border-top:1px solid #f1f5f9;}
+  .cc-legend-item{display:flex;align-items:center;gap:5px;font-size:11px;color:#64748b;}
+  .cc-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+
+  /* TABLE */
+  .table-wrap{background:white;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,0.06);overflow-x:auto;overflow-y:visible;margin-bottom:28px;-webkit-overflow-scrolling:touch;}
+  .table-wrap table{min-width:1050px;}
+  table{width:100%;border-collapse:collapse;}
+  thead tr{background:#0f2d4a;color:white;}
+  thead th{padding:11px 10px;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.4px;text-align:left;white-space:nowrap;}
+  thead th.num{text-align:right;}
+  tbody tr:nth-child(even){background:#f8fafc;}
+  tbody tr:hover{background:#eff6ff;}
+  tbody td{padding:9px 10px;font-size:12px;border-bottom:1px solid #e2e8f0;vertical-align:middle;}
+  tbody td.num{text-align:right;font-variant-numeric:tabular-nums;}
+  tbody td.he{color:#1d4ed8;font-weight:600;}
+  tbody td.he.zero{color:#94a3b8;font-weight:400;}
+  tbody td.neto{font-weight:700;color:#059669;font-size:13px;}
+  tfoot tr{background:#f1f5f9;}
+  tfoot td{padding:10px;font-size:12px;font-weight:700;color:#0f2d4a;border-top:2px solid #0f2d4a;}
+  tfoot td.num{text-align:right;}
+  tfoot td.total-neto{color:#059669;font-size:14px;}
+  .cargo-badge{display:inline-block;padding:2px 8px;border-radius:20px;font-size:10.5px;font-weight:500;}
+  .cargo-tecnico{background:#dbeafe;color:#1d4ed8;}
+  .cargo-gerente{background:#fce7f3;color:#9d174d;}
+  .cargo-ingeniero{background:#d1fae5;color:#065f46;}
+  .cargo-otro{background:#f1f5f9;color:#475569;}
+
+  /* MULTI-SELECT CC */
+  .cc-multi-wrap{position:relative;display:inline-block;min-width:180px;max-width:210px;}
+  .cc-multi-display{font-size:11px;padding:4px 24px 4px 8px;border:1px solid #e2e8f0;border-radius:6px;background:white;color:#334155;cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;user-select:none;position:relative;}
+  .cc-multi-display::after{content:'▾';position:absolute;right:7px;top:50%;transform:translateY(-50%);font-size:10px;color:#94a3b8;}
+  .cc-multi-display.changed{border-color:#059669;background:#f0fdf4;font-weight:600;color:#059669;}
+  .cc-multi-dropdown{display:none;position:absolute;top:calc(100% + 4px);left:0;min-width:200px;background:white;border:1px solid #e2e8f0;border-radius:8px;box-shadow:0 8px 24px rgba(0,0,0,0.12);z-index:500;padding:6px 0;max-height:220px;overflow-y:auto;}
+  .cc-multi-dropdown.open{display:block;}
+  .cc-multi-option{display:flex;align-items:center;gap:8px;padding:7px 12px;cursor:pointer;font-size:12px;color:#334155;transition:background 0.15s;}
+  .cc-multi-option:hover{background:#eff6ff;}
+  .cc-multi-option input[type=checkbox]{accent-color:#2165a8;width:13px;height:13px;flex-shrink:0;}
+  .cc-multi-option.selected{background:#f0fdf4;color:#059669;font-weight:600;}
+
+  /* CC POPUP PANEL */
+  .cc-employees-panel{display:none;background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:14px 16px;margin-top:14px;animation:fadeIn 0.2s ease;}
+  .cc-employees-panel.open{display:block;}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
+  .cc-emp-header{font-size:13px;font-weight:700;color:#0f2d4a;margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+  .cc-emp-list{display:flex;flex-wrap:wrap;gap:8px;}
+  .cc-emp-chip{background:white;border:1px solid #e2e8f0;border-radius:20px;padding:4px 12px;font-size:11.5px;color:#334155;box-shadow:0 1px 3px rgba(0,0,0,0.05);}
+  .cc-emp-chip .chip-pct{color:#94a3b8;font-size:10.5px;margin-left:4px;}
+  .cc-bar-row{cursor:pointer;border-radius:8px;padding:4px;transition:background 0.15s;}
+  .cc-bar-row:hover{background:#f0f4f8;}
+  .cc-bar-row.active{background:#eff6ff;}
+
+  .obs-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:28px;}
+  .obs-card{background:white;border-radius:10px;padding:16px 18px;box-shadow:0 2px 6px rgba(0,0,0,0.05);border-left:4px solid;}
+  .obs-card.info{border-color:#2165a8;}.obs-card.warn{border-color:#d97706;}.obs-card.ok{border-color:#059669;}
+  .obs-card h4{font-size:12px;font-weight:700;margin-bottom:6px;color:#0f2d4a;}
+  .obs-card p{font-size:11.5px;color:#475569;line-height:1.6;}
+
+  /* APPROVALS */
+  .approval-section{background:white;border-radius:12px;padding:28px;box-shadow:0 2px 8px rgba(0,0,0,0.06);margin-bottom:28px;}
+  .approval-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px;margin-top:20px;}
+  .approval-box{border:2px solid;border-radius:12px;padding:20px;text-align:center;position:relative;transition:all 0.3s;}
+  .approval-box.done{border-color:#059669;background:#f0fdf4;}
+  .approval-box.review{border-color:#d97706;background:#fffbeb;}
+  .approval-box.pending{border-color:#94a3b8;background:#f8fafc;}
+  .approval-box.approved{border-color:#059669;background:#f0fdf4;}
+  @keyframes approvedPulse{0%{transform:scale(1)}50%{transform:scale(1.03)}100%{transform:scale(1)}}
+  .approval-status-icon{font-size:32px;margin-bottom:8px;}
+  .approval-role{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:#64748b;margin-bottom:4px;}
+  .approval-name{font-size:14px;font-weight:700;color:#0f2d4a;margin-bottom:4px;}
+  .approval-cargo{font-size:11px;color:#64748b;margin-bottom:10px;}
+  .approval-tag{display:inline-block;padding:4px 12px;border-radius:20px;font-size:11px;font-weight:700;}
+  .tag-done{background:#dcfce7;color:#16a34a;}
+  .tag-review{background:#fef3c7;color:#d97706;}
+  .tag-pending{background:#f1f5f9;color:#64748b;}
+  .tag-approved{background:#dcfce7;color:#16a34a;}
+  .approval-date{font-size:11px;color:#94a3b8;margin-top:8px;line-height:1.5;}
+
+  .btn-approve{margin-top:14px;width:100%;padding:11px 16px;border:none;border-radius:8px;background:linear-gradient(135deg,#0f2d4a,#2165a8);color:white;font-size:13px;font-weight:700;cursor:pointer;transition:all 0.25s;display:flex;align-items:center;justify-content:center;gap:8px;}
+  .btn-approve:hover{transform:translateY(-1px);box-shadow:0 4px 14px rgba(33,101,168,0.4);}
+  .btn-approve.approved-btn{background:linear-gradient(135deg,#059669,#10b981);cursor:default;}
+  .btn-approve.approved-btn:hover{transform:none;box-shadow:none;}
+
+  .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:1000;align-items:center;justify-content:center;backdrop-filter:blur(4px);}
+  .modal-overlay.active{display:flex;}
+  .modal{background:white;border-radius:16px;padding:36px;max-width:460px;width:90%;box-shadow:0 20px 60px rgba(0,0,0,0.3);animation:modalIn 0.3s ease;}
+  @keyframes modalIn{from{transform:scale(0.9);opacity:0}to{transform:scale(1);opacity:1}}
+  .modal-icon{font-size:48px;text-align:center;margin-bottom:14px;}
+  .modal h3{font-size:20px;font-weight:800;color:#0f2d4a;margin-bottom:8px;text-align:center;}
+  .modal p{font-size:13px;color:#475569;line-height:1.6;text-align:center;margin-bottom:16px;}
+  .modal-amount{font-size:38px;font-weight:800;color:#059669;text-align:center;margin:16px 0;background:#f0fdf4;border-radius:12px;padding:14px;}
+  .modal-detail{font-size:11.5px;color:#94a3b8;text-align:center;margin-bottom:20px;}
+  .modal-buttons{display:flex;gap:12px;}
+  .btn-modal-cancel{flex:1;padding:12px;border:2px solid #e2e8f0;border-radius:8px;background:white;font-size:13px;font-weight:600;cursor:pointer;color:#64748b;}
+  .btn-modal-cancel:hover{border-color:#94a3b8;}
+  .btn-modal-confirm{flex:2;padding:12px;border:none;border-radius:8px;background:linear-gradient(135deg,#059669,#10b981);color:white;font-size:13px;font-weight:700;cursor:pointer;}
+  .btn-modal-confirm:hover{transform:translateY(-1px);box-shadow:0 4px 14px rgba(5,150,105,0.4);}
+
+  .toast{position:fixed;bottom:24px;right:24px;background:#2165a8;color:white;padding:14px 20px;border-radius:10px;font-size:13px;font-weight:600;box-shadow:0 4px 20px rgba(33,101,168,0.4);z-index:2000;transform:translateY(100px);opacity:0;transition:all 0.4s;display:flex;align-items:center;gap:8px;max-width:380px;}
+  .toast.show{transform:translateY(0);opacity:1;}
+
+  .print-note{text-align:center;font-size:11px;color:#94a3b8;margin-top:28px;padding-top:16px;border-top:1px solid #e2e8f0;}
+  @media print{body{background:white;}.page{padding:16px;}.btn-approve,.modal-overlay,.toast{display:none!important;}}
+</style>
+</head>
+<body>
+
+<div class="modal-overlay" id="approvalModal">
+  <div class="modal">
+    <div class="modal-icon">🔐</div>
+    <h3>Aprobar Nómina — Gerencia General</h3>
+    <p>Al confirmar, autoriza el desembolso total de nómina de la <strong>2da quincena de febrero 2026</strong>, incluyendo horas extras del mes completo de febrero.</p>
+    <div class="modal-amount">$36,163,801</div>
+    <div class="modal-detail">21 colaboradores · Período 16–28 Feb 2026 · UP KEEP SERVICES SAS · NIT 829.003.481-0</div>
+    <div class="modal-buttons">
+      <button class="btn-modal-cancel" onclick="closeModal()">✕ Cancelar</button>
+      <button class="btn-modal-confirm" onclick="confirmApproval()">✅ Confirmar y Aprobar</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast">✅ Acción completada</div>
+
+<div class="page">
+
+  <div class="header">
+    <div class="header-logo-area">
+      <img class="header-logo" src="data:image/jpeg;base64,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" alt="UP KEEP SERVICES Logo">
+      <div class="header-left">
+        <h1>UP KEEP SERVICES SAS</h1>
+        <h2>Informe de Nómina para Gerencia</h2>
+        <div class="nit">NIT: 829.003.481-0</div>
+        <div class="periodo">📅 Período: 16 de febrero – 28 de febrero de 2026</div>
+      </div>
+    </div>
+    <div class="header-right">
+      <div class="fecha-label">Fecha de emisión</div>
+      <div class="fecha">26 Feb 2026</div>
+      <div class="badge-quincena">⭐ 2da Quincena Febrero</div>
+    </div>
+  </div>
+
+  <div class="aviso-especial">
+    <div class="icon">⚠️</div>
+    <div>
+      <h3>NOTA ESPECIAL — HORAS EXTRAS DEL MES COMPLETO (FEBRERO 2026)</h3>
+      <p>En esta quincena (16–28 feb 2026) se liquidan y pagan las <strong>horas extras de TODO el mes de febrero de 2026</strong> (01–28 feb). Elaboradas y certificadas por el <strong>Gerente de Ingeniería (Brayan Alfonso Castro Moreno)</strong>. Total liquidado: <strong>$6,543,964 COP</strong> entre 14 colaboradores (16.7% del neto total). Cuando un empleado pertenece a múltiples centros de costo (separados por "/"), el salario neto se distribuye proporcionalmente entre cada uno.</p>
+    </div>
+  </div>
+
+  <div class="section-title">📊 Resumen Ejecutivo</div>
+  <div class="kpi-grid kpi-grid-4">
+    <div class="kpi-card blue"><div class="kpi-label">Total Neto a Pagar</div><div class="kpi-value">$36,163,801</div><div class="kpi-sub">Desembolso total esta quincena</div></div>
+    <div class="kpi-card green"><div class="kpi-label">Total Ingresos Brutos</div><div class="kpi-value">$39,100,677</div><div class="kpi-sub">Antes de deducciones</div></div>
+    <div class="kpi-card amber"><div class="kpi-label">Horas Extras (Mes Completo)</div><div class="kpi-value">$6,543,964</div><div class="kpi-sub">14 de 21 empleados con HE</div></div>
+    <div class="kpi-card red"><div class="kpi-label">Total Deducciones</div><div class="kpi-value">$2,936,876</div><div class="kpi-sub">Salud $1,468,438 · Pensión $1,468,438</div></div>
+  </div>
+  <div class="kpi-grid kpi-grid-5">
+    <div class="kpi-card blue"><div class="kpi-label">No. Empleados</div><div class="kpi-value">21</div><div class="kpi-sub">Activos en nómina</div></div>
+    <div class="kpi-card green"><div class="kpi-label">Salarios Base</div><div class="kpi-value">$28,563,644</div><div class="kpi-sub">73.1% del total ingresos</div></div>
+    <div class="kpi-card amber"><div class="kpi-label">Aux. Transporte</div><div class="kpi-value">$2,117,315</div><div class="kpi-sub">17 colaboradores</div></div>
+    <div class="kpi-card purple"><div class="kpi-label">Recargos Noc./Dom.</div><div class="kpi-value">$916,618</div><div class="kpi-sub">Nocturnos + Dominicales</div></div>
+    <div class="kpi-card green"><div class="kpi-label">Neto Promedio Emp.</div><div class="kpi-value">$1,722,086</div><div class="kpi-sub">Por colaborador esta quincena</div></div>
+  </div>
+
+  <div class="section-title">💰 Composición de la Nómina</div>
+  <div class="resumen-grid">
+    <div class="resumen-card">
+      <h3>📥 Ingresos por Concepto</h3>
+      <div class="fin-row"><span class="label">Salarios base</span><span class="amount">$28,563,644</span></div>
+      <div class="fin-row"><span class="label">HE diurnas 125% (mes completo)</span><span class="amount" style="color:#1d4ed8">$5,164,596</span></div>
+      <div class="fin-row"><span class="label">HE nocturnas 175% (mes completo)</span><span class="amount" style="color:#1d4ed8">$309,308</span></div>
+      <div class="fin-row"><span class="label">HE diurnas dominicales/festivas</span><span class="amount" style="color:#1d4ed8">$867,115</span></div>
+      <div class="fin-row"><span class="label">HE nocturnas dominicales/festivas</span><span class="amount" style="color:#1d4ed8">$202,945</span></div>
+      <div class="fin-row"><span class="label">Auxiliar de transporte / conectividad</span><span class="amount">$2,117,315</span></div>
+      <div class="fin-row"><span class="label">Recargos nocturnos</span><span class="amount">$662,956</span></div>
+      <div class="fin-row"><span class="label">Recargos dominicales / festivos</span><span class="amount">$180,442</span></div>
+      <div class="fin-row"><span class="label">Recargo nocturno dominical ord.</span><span class="amount">$73,220</span></div>
+      <div class="fin-row"><span class="label">Bonificaciones ocasionales</span><span class="amount">$287,470</span></div>
+      <div class="fin-row"><span class="label">Licencia por luto</span><span class="amount">$405,000</span></div>
+      <div class="fin-row"><span class="label">Salario VRP</span><span class="amount">$266,666</span></div>
+      <div class="fin-row total"><span class="label">TOTAL INGRESOS BRUTOS</span><span class="amount">$39,100,677</span></div>
+    </div>
+    <div class="resumen-card">
+      <h3>📤 Deducciones y Neto a Pagar</h3>
+      <div class="fin-row"><span class="label">Fondo de salud (empleado 4%)</span><span class="amount" style="color:#dc2626">- $1,468,438</span></div>
+      <div class="fin-row"><span class="label">Fondo de pensión (empleado 4%)</span><span class="amount" style="color:#dc2626">- $1,468,438</span></div>
+      <div class="fin-row" style="border-top:2px solid #dc2626;margin-top:6px;padding-top:12px;">
+        <span class="label" style="font-weight:700;color:#dc2626;">TOTAL DEDUCCIONES</span>
+        <span class="amount" style="color:#dc2626;font-size:14px;">- $2,936,876</span>
+      </div>
+      <div style="background:#f0fdf4;border-radius:10px;padding:18px;text-align:center;margin-top:14px;">
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;color:#059669;letter-spacing:0.5px;margin-bottom:6px;">TOTAL NETO A PAGAR</div>
+        <div style="font-size:36px;font-weight:800;color:#059669;">$36,163,801</div>
+        <div style="font-size:11px;color:#64748b;margin-top:4px;">Treinta y seis millones ciento sesenta y tres mil ochocientos un pesos COP</div>
+      </div>
+      <div style="background:#eff6ff;border-radius:10px;padding:14px 16px;margin-top:12px;">
+        <div style="font-size:11px;font-weight:700;color:#1d4ed8;margin-bottom:8px;">📊 DISTRIBUCIÓN DEL GASTO</div>
+        <div class="fin-row"><span class="label">Salarios base</span><span style="font-weight:600;color:#1d4ed8;">73.1%</span></div>
+        <div class="fin-row"><span class="label">Horas extras (mes completo)</span><span style="font-weight:600;color:#1d4ed8;">16.7%</span></div>
+        <div class="fin-row"><span class="label">Aux. transporte + recargos</span><span style="font-weight:600;color:#1d4ed8;">7.6%</span></div>
+        <div class="fin-row"><span class="label">Bonificaciones y otros</span><span style="font-weight:600;color:#1d4ed8;">2.6%</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="he-highlight">
+    <div class="section-title" style="margin-bottom:0;">⏱️ Horas Extras — Liquidación Mes Completo (Febrero 2026)</div>
+    <div style="font-size:12px;color:#374151;margin-top:8px;">Elaboradas y certificadas por <strong>Brayan Alfonso Castro Moreno – Gerente de Ingeniería</strong>. Pago consolidado del 01 al 28 de febrero de 2026.</div>
+    <div class="he-grid">
+      <div class="he-item"><div class="he-val">$5,164,596</div><div class="he-lab">Diurnas <strong>125%</strong></div></div>
+      <div class="he-item"><div class="he-val">$309,308</div><div class="he-lab">Nocturnas <strong>175%</strong></div></div>
+      <div class="he-item"><div class="he-val">$867,115</div><div class="he-lab">Diurnas Dom./Festivo</div></div>
+      <div class="he-item"><div class="he-val">$202,945</div><div class="he-lab">Nocturnas Dom./Festivo</div></div>
+    </div>
+    <div style="margin-top:14px;padding:10px 14px;background:white;border-radius:8px;font-size:12px;color:#1d4ed8;font-weight:600;text-align:center;">
+      🔔 Total HE Liquidadas: <span style="font-size:16px;font-weight:800;">$6,543,964 COP</span> &nbsp;|&nbsp; 14 de 21 empleados
+    </div>
+  </div>
+
+  <div class="section-title">🏢 Distribución de Neto a Pagar por Centro de Costo</div>
+  <div class="cc-section">
+    <div class="cc-note">💡 <strong>Distribución proporcional:</strong> Cuando un empleado pertenece a múltiples centros de costo (separados por "/"), su salario neto se divide en partes iguales entre cada centro. Ej: "Capitalbus / Slacol" → 50% a cada uno. "Administrativo/Proyectos/Capitalbus" → 33.3% a cada uno.</div>
+    <div id="ccChart"></div>
+    <div class="cc-legend" id="ccLegend"></div>
+    <div id="ccTotals" style="margin-top:14px;padding:12px 16px;background:#f8fafc;border-radius:8px;font-size:12px;color:#475569;line-height:1.8;"></div>
+    <div id="ccEmpPanel" class="cc-employees-panel"></div>
+  </div>
+
+  <div class="section-title">👥 Detalle por Colaborador — Centro de Costo Editable</div>
+  <p style="font-size:12px;color:#64748b;margin-bottom:14px;">💡 Cambia el centro de costo de cualquier colaborador. Si asignas múltiples con "/" el salario se distribuye proporcionalmente. La gráfica se actualiza en tiempo real.</p>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Colaborador</th>
+          <th>Cargo</th>
+          <th>Centro de Costo</th>
+          <th class="num">Sueldo Base</th>
+          <th class="num">Aux. Transp.</th>
+          <th class="num">H. Extras (Mes)</th>
+          <th class="num">Recargos</th>
+          <th class="num">Otros Ingr.</th>
+          <th class="num">Total Ingr.</th>
+          <th class="num">Deducciones</th>
+          <th class="num">Neto a Pagar</th>
+        </tr>
+      </thead>
+      <tbody id="empleadosBody"></tbody>
+      <tfoot>
+        <tr>
+          <td colspan="4"><strong>TOTALES (21 empleados)</strong></td>
+          <td class="num"><strong>$28,563,644</strong></td>
+          <td class="num"><strong>$2,117,315</strong></td>
+          <td class="num" style="color:#1d4ed8;"><strong>$6,543,964</strong></td>
+          <td class="num"><strong>$916,618</strong></td>
+          <td class="num"><strong>$1,212,136</strong></td>
+          <td class="num"><strong>$39,100,677</strong></td>
+          <td class="num" style="color:#dc2626;"><strong>-$2,936,876</strong></td>
+          <td class="num total-neto"><strong>$36,163,801</strong></td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+
+  <div class="section-title">📋 Observaciones y Consideraciones</div>
+  <div class="obs-grid">
+    <div class="obs-card info"><h4>🔵 Horas Extras — Mes Completo</h4><p>14/21 empleados (66.7%) generaron HE en febrero. Mayor valor: Francisco Taborda $1,012,633. Elaboradas y certificadas por el Gerente de Ingeniería para el período 01–28 febrero 2026.</p></div>
+    <div class="obs-card warn"><h4>🟡 Conceptos Especiales</h4><p>Licencia por luto: Juan F. Moreno ($405,000). Bonificación ocasional: Valeria Daza ($287,470) — por acuerdo, UPK asume las retenciones correspondientes. Salario VRP: Santiago Moncada ($266,666).</p></div>
+    <div class="obs-card ok"><h4>🟢 Distribución por CC</h4><p>Los empleados con CC múltiples (/) tienen su neto distribuido proporcionalmente. El centro con mayor carga es Capitalbus por concentrar la operación técnica del período.</p></div>
+    <div class="obs-card info"><h4>🔵 Seguridad Social (Empleado)</h4><p>Salud: $1,468,438. Pensión: $1,468,438. Adicionar aporte patronal: salud 8.5%, pensión 12%, ARL según nivel de riesgo de cada colaborador.</p></div>
+    <div class="obs-card warn"><h4>🟡 Impacto Presupuestal HE</h4><p>HE = 16.7% del neto total. Al ser pago acumulado del mes completo, esta quincena supera la ordinaria. Se recomienda evaluar necesidad de HE para el período siguiente.</p></div>
+    <div class="obs-card ok"><h4>🟢 Indicadores Clave</h4><p>Neto promedio: $1,722,086. Relación deducción/bruto: 7.5%. Mayor sueldo base: Valeria Daza ($3,593,369). Mayor neto c/ HE: Francisco Taborda ($2,434,032).</p></div>
+  </div>
+
+  <div class="section-title">✍️ Flujo de Aprobación</div>
+  <div class="approval-section">
+    <p style="font-size:12px;color:#64748b;margin-bottom:4px;">Flujo: Elaboración → Revisión y Validación → Aprobación Final para desembolso.</p>
+    <div class="approval-grid">
+      <div class="approval-box done">
+        <div class="approval-status-icon">✅</div>
+        <div class="approval-role">Paso 1 — Elaboración</div>
+        <div class="approval-name">Brayan Alfonso Castro Moreno</div>
+        <div class="approval-cargo">Gerente de Ingeniería</div>
+        <span class="approval-tag tag-done">✔ Elaborado y firmado</span>
+        <div class="approval-date">Horas extras calculadas, verificadas y certificadas<br>Febrero 2026 · Período 01–28 feb</div>
+      </div>
+      <div class="approval-box review">
+        <div class="approval-status-icon">🔍</div>
+        <div class="approval-role">Paso 2 — Revisión y Validación</div>
+        <div class="approval-name">Valeria Daza Mazo</div>
+        <div class="approval-cargo">Gerente Táctica</div>
+        <span class="approval-tag tag-review">✔ Revisado y validado</span>
+        <div class="approval-date">Nómina revisada y validada<br>Pendiente aprobación Gerencia General</div>
+      </div>
+      <div class="approval-box pending" id="approvalBox3">
+        <div class="approval-status-icon" id="approvalIcon3">🔐</div>
+        <div class="approval-role">Paso 3 — Aprobación Final</div>
+        <div class="approval-name">Gerencia General</div>
+        <div class="approval-cargo">UP KEEP SERVICES SAS · NIT 829.003.481-0</div>
+        <span class="approval-tag tag-pending" id="approvalTag3">⏳ Pendiente aprobación</span>
+        <div class="approval-date" id="approvalDate3">Autorización requerida para desembolso<br><strong>$36,163,801 COP · 21 colaboradores</strong></div>
+        <button class="btn-approve" id="approveBtn" onclick="openModal()">🔐 Aprobar Nómina — Gerencia General</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="print-note">
+    UP KEEP SERVICES SAS &nbsp;·&nbsp; NIT: 829.003.481-0 &nbsp;·&nbsp; Nómina 2da Quincena Febrero 2026 &nbsp;·&nbsp; 26 de febrero de 2026
+    <br>Documento de uso interno y confidencial. Todos los valores en pesos colombianos (COP).
+  </div>
+</div>
+
+<script>
+const CENTROS_BASE = [
+  "Capitalbus","Administrativo","Mantenimiento Capitalbus","Comercial","Proyectos","Slacol"
+];
+const CC_COLORS = {
+  "Capitalbus":"#2165a8","Administrativo":"#7c3aed","Mantenimiento Capitalbus":"#0891b2",
+  "Comercial":"#d97706","Proyectos":"#059669","Slacol":"#e11d48"
+};
+function getColor(cc){ return CC_COLORS[cc]||'#64748b'; }
+
+function parseCCs(ccStr){
+  return ccStr.split(/[\/]/).map(s=>s.trim()).filter(Boolean);
+}
+function splitCC(ccStr,neto){
+  const parts=parseCCs(ccStr);
+  const share=neto/parts.length;
+  return parts.map(p=>({cc:p,amount:share}));
+}
+
+const EMPLEADOS=[
+  {n:1,  nombre:"Diego Andrés Hernández",          cargo:"Técnico",                tipo:"tecnico",  cc:"Capitalbus",                             sueldo:1276965,aux:124548,he:921446, rec:0,      otros:0,      total:2322959,ded:175872,neto:2147087},
+  {n:2,  nombre:"Claudia Isabel Roa Gaitán",        cargo:"Servicios Generales",    tipo:"otro",     cc:"Administrativo",                         sueldo:875452, aux:124548,he:0,      rec:0,      otros:0,      total:1000000,ded:70036, neto:929964},
+  {n:3,  nombre:"Elizabeth Leguizamón Velandia",    cargo:"Mesa de Ayuda",          tipo:"otro",     cc:"Mantenimiento Capitalbus",               sueldo:875452, aux:124548,he:441905, rec:52925,  otros:0,      total:1494830,ded:109622,neto:1385208},
+  {n:4,  nombre:"José Domingo Pabón Ropero",        cargo:"Técnico",                tipo:"tecnico",  cc:"Capitalbus",                             sueldo:1276965,aux:124548,he:769081, rec:0,      otros:0,      total:2170594,ded:163682,neto:2006912},
+  {n:5,  nombre:"William Caicedo",                  cargo:"Comercial",              tipo:"otro",     cc:"Comercial",                              sueldo:1500000,aux:124548,he:0,      rec:0,      otros:0,      total:1624548,ded:120000,neto:1504548},
+  {n:6,  nombre:"Francisco Javier Taborda Sánchez", cargo:"Técnico",                tipo:"tecnico",  cc:"Capitalbus",                             sueldo:1497675,aux:124548,he:1012633,rec:0,      otros:0,      total:2634856,ded:200824,neto:2434032},
+  {n:7,  nombre:"José Gregorio Caicedo Salazar",    cargo:"Técnico",                tipo:"tecnico",  cc:"Proyectos",                              sueldo:1150000,aux:124548,he:771023, rec:0,      otros:0,      total:2045571,ded:153682,neto:1891889},
+  {n:8,  nombre:"Luis Alfonso Cubides",             cargo:"Técnico",                tipo:"tecnico",  cc:"Capitalbus",                             sueldo:681048, aux:66425, he:21766,  rec:0,      otros:0,      total:769239, ded:56226, neto:713013},
+  {n:9,  nombre:"Valeria Daza Mazo",                cargo:"Gerente Táctica",        tipo:"gerente",  cc:"Administrativo",                         sueldo:3593369,aux:0,     he:0,      rec:0,      otros:287470, total:3880839,ded:287470,neto:3593369},
+  {n:10, nombre:"Juan Felipe Moreno Rodríguez",     cargo:"Técnico",                tipo:"tecnico",  cc:"Capitalbus",                             sueldo:810000, aux:83032, he:462528, rec:0,      otros:405000, total:1760560,ded:135410,neto:1625150},
+  {n:11, nombre:"Anderson Rueda Herrera",           cargo:"Técnico",                tipo:"tecnico",  cc:"Mantenimiento Capitalbus",               sueldo:875452, aux:124548,he:503185, rec:431757, otros:98688,  total:2033630,ded:152726,neto:1880904},
+  {n:12, nombre:"Duván Felipe Higuera Aponte",      cargo:"Técnico",                tipo:"tecnico",  cc:"Capitalbus",                             sueldo:950000, aux:124548,he:229943, rec:0,      otros:27636,  total:1332127,ded:96606, neto:1235521},
+  {n:13, nombre:"José Daniel Pulido Quesada",       cargo:"Técnico",                tipo:"tecnico",  cc:"Capitalbus",                             sueldo:875452, aux:124548,he:375251, rec:178274, otros:76403,  total:1629928,ded:120430,neto:1509498},
+  {n:14, nombre:"Daniel Felipe Cárdenas Rivera",    cargo:"Ing. Cloud y Desarrollo",tipo:"ingeniero",cc:"Capitalbus / Slacol",                    sueldo:1150000,aux:124548,he:462875, rec:0,      otros:0,      total:1737423,ded:129030,neto:1608393},
+  {n:15, nombre:"Ronny Enrique Durán Muñoz",        cargo:"Técnico",                tipo:"tecnico",  cc:"Capitalbus",                             sueldo:700362, aux:99638, he:111819, rec:0,      otros:50935,  total:962754, ded:69050, neto:893704},
+  {n:16, nombre:"Santiago Gil Rangel",              cargo:"Ingeniero de Soporte",   tipo:"ingeniero",cc:"Capitalbus / Administrativo",            sueldo:1100000,aux:124548,he:135000, rec:0,      otros:0,      total:1359548,ded:98800, neto:1260748},
+  {n:17, nombre:"Katiuska Cabrera Berrio",          cargo:"Ejecutiva Gerencia",     tipo:"otro",     cc:"Administrativo",                         sueldo:1500000,aux:124548,he:0,      rec:0,      otros:0,      total:1624548,ded:120000,neto:1504548},
+  {n:18, nombre:"Juan Pablo Prieto Lozano",         cargo:"Líder Desarrollo",       tipo:"otro",     cc:"Capitalbus",                             sueldo:2000000,aux:0,     he:0,      rec:0,      otros:0,      total:2000000,ded:160000,neto:1840000},
+  {n:19, nombre:"Sonia Pilar Durán Coronado",       cargo:"Gestora de Proyectos",   tipo:"otro",     cc:"Proyectos / Capitalbus",                 sueldo:1750000,aux:124548,he:0,      rec:0,      otros:0,      total:1874548,ded:140000,neto:1734548},
+  {n:20, nombre:"Brayan Alfonso Castro Moreno",     cargo:"Gerente Ingeniería",     tipo:"gerente",  cc:"Administrativo / Proyectos / Capitalbus",sueldo:3250000,aux:0,     he:0,      rec:0,      otros:0,      total:3250000,ded:260000,neto:2990000},
+  {n:21, nombre:"Santiago Andrés Moncada Ibáñez",   cargo:"Técnico",                tipo:"tecnico",  cc:"Capitalbus",                             sueldo:875452, aux:124548,he:325509, rec:0,      otros:266666, total:1592175,ded:117410,neto:1474765},
+];
+
+function fmt(n){return '$'+Math.round(n).toLocaleString('es-CO');}
+
+// ── MULTISELECT ───────────────────────────────────────────────────────────
+function buildMultiSelect(idx){
+  const e=EMPLEADOS[idx];
+  if(!e._origCC) e._origCC=e.cc;
+  const selected=new Set(parseCCs(e.cc));
+  const origSet=new Set(parseCCs(e._origCC));
+
+  const wrap=document.createElement('div');
+  wrap.className='cc-multi-wrap';
+
+  const display=document.createElement('div');
+  const isChanged=([...selected].sort().join()!== [...origSet].sort().join());
+  display.className='cc-multi-display'+(isChanged?' changed':'');
+  display.textContent=[...selected].join(' / ')||'— Sin asignar';
+
+  display.onclick=(ev)=>{
+    ev.stopPropagation();
+    const dd=wrap.querySelector('.cc-multi-dropdown');
+    document.querySelectorAll('.cc-multi-dropdown.open').forEach(d=>{if(d!==dd)d.classList.remove('open');});
+    dd.classList.toggle('open');
+  };
+
+  const dropdown=document.createElement('div');
+  dropdown.className='cc-multi-dropdown';
+
+  CENTROS_BASE.forEach(cc=>{
+    const opt=document.createElement('div');
+    opt.className='cc-multi-option'+(selected.has(cc)?' selected':'');
+    opt.innerHTML=`<input type="checkbox" ${selected.has(cc)?'checked':''}><span style="width:8px;height:8px;border-radius:50%;background:${getColor(cc)};display:inline-block;flex-shrink:0;"></span>${cc}`;
+    opt.onclick=(ev)=>{
+      ev.stopPropagation();
+      const cb=opt.querySelector('input');
+      cb.checked=!cb.checked;
+      if(cb.checked){selected.add(cc);opt.classList.add('selected');}
+      else{selected.delete(cc);opt.classList.remove('selected');}
+      const ccs=[...selected];
+      if(!e._origCC) e._origCC=e.cc;
+      e.cc=ccs.length>0?ccs.join(' / '):(e._origCC||'Capitalbus');
+      const changed=([...new Set(parseCCs(e.cc))].sort().join()!== [...origSet].sort().join());
+      display.textContent=ccs.length>0?ccs.join(' / '):'— Sin asignar';
+      display.className='cc-multi-display'+(changed?' changed':'');
+      renderCCChart();
+      if(ccs.length>0) showToast(`✅ <strong>${e.nombre.split(' ')[0]}</strong> → <strong>${e.cc}</strong>`,'#2165a8');
+    };
+    dropdown.appendChild(opt);
+  });
+
+  wrap.appendChild(display);
+  wrap.appendChild(dropdown);
+  return wrap;
+}
+
+// ── RENDER TABLE ──────────────────────────────────────────────────────────
+function renderTable(){
+  const tbody=document.getElementById('empleadosBody');
+  tbody.innerHTML='';
+  EMPLEADOS.forEach((e,idx)=>{
+    const tr=document.createElement('tr');
+    tr.innerHTML=`<td>${e.n}</td><td><strong>${e.nombre}</strong></td><td><span class="cargo-badge cargo-${e.tipo}">${e.cargo}</span></td>`;
+    const tdCC=document.createElement('td');
+    tdCC.appendChild(buildMultiSelect(idx));
+    tr.appendChild(tdCC);
+    tr.insertAdjacentHTML('beforeend',`
+      <td class="num">${fmt(e.sueldo)}</td>
+      <td class="num">${e.aux>0?fmt(e.aux):'—'}</td>
+      <td class="num he${e.he===0?' zero':''}">${e.he>0?fmt(e.he):'—'}</td>
+      <td class="num">${e.rec>0?fmt(e.rec):'—'}</td>
+      <td class="num">${e.otros>0?fmt(e.otros):'—'}</td>
+      <td class="num">${fmt(e.total)}</td>
+      <td class="num" style="color:#dc2626;">-${fmt(e.ded)}</td>
+      <td class="num neto">${fmt(e.neto)}</td>
+    `);
+    tbody.appendChild(tr);
+  });
+}
+
+// ── CC CHART (CLICKABLE) ──────────────────────────────────────────────────
+let activeCC=null;
+
+function calcCC(){
+  const m={};
+  EMPLEADOS.forEach(e=>{
+    splitCC(e.cc,e.neto).forEach(({cc,amount})=>{
+      if(!m[cc])m[cc]=0;
+      m[cc]+=amount;
+    });
+  });
+  return m;
+}
+
+function getEmpsByCC(ccTarget){
+  const list=[];
+  EMPLEADOS.forEach(e=>{
+    const parts=parseCCs(e.cc);
+    if(parts.includes(ccTarget)){
+      list.push({nombre:e.nombre,cargo:e.cargo,neto:e.neto,share:e.neto/parts.length,pct:Math.round(100/parts.length),multi:parts.length>1});
+    }
+  });
+  return list;
+}
+
+function showCCPanel(cc,color){
+  const panel=document.getElementById('ccEmpPanel');
+  if(activeCC===cc){
+    activeCC=null;
+    panel.classList.remove('open');
+    document.querySelectorAll('.cc-bar-row').forEach(r=>r.classList.remove('active'));
+    return;
+  }
+  activeCC=cc;
+  document.querySelectorAll('.cc-bar-row').forEach(r=>r.classList.remove('active'));
+  const target=document.querySelector(`.cc-bar-row[data-cc]`);
+  document.querySelectorAll('.cc-bar-row').forEach(r=>{if(r.dataset.cc===cc)r.classList.add('active');});
+
+  const emps=getEmpsByCC(cc);
+  const total=emps.reduce((s,e)=>s+e.share,0);
+  const chips=emps.map(e=>`
+    <div class="cc-emp-chip">
+      <span style="width:7px;height:7px;border-radius:50%;background:${color};display:inline-block;margin-right:4px;vertical-align:middle;"></span>
+      <strong>${e.nombre.split(' ').slice(0,2).join(' ')}</strong>
+      <span class="chip-pct">— ${fmt(e.share)}${e.multi?` (${e.pct}%)`:''}</span>
+    </div>`).join('');
+
+  panel.innerHTML=`
+    <div class="cc-emp-header">
+      <span style="width:12px;height:12px;border-radius:50%;background:${color};display:inline-block;"></span>
+      <strong>${cc}</strong> &nbsp;·&nbsp; ${emps.length} colaborador${emps.length!==1?'es':''} &nbsp;·&nbsp; Total imputado: <span style="color:${color};font-weight:700;margin-left:4px;">${fmt(total)}</span>
+      <span style="margin-left:auto;font-size:11px;color:#94a3b8;cursor:pointer;padding:2px 8px;border-radius:4px;" onmouseover="this.style.background='#fee2e2'" onmouseout="this.style.background=''" onclick="document.getElementById('ccEmpPanel').classList.remove('open');activeCC=null;document.querySelectorAll('.cc-bar-row').forEach(r=>r.classList.remove('active'));">✕ cerrar</span>
+    </div>
+    <div class="cc-emp-list">${chips}</div>`;
+  panel.classList.add('open');
+  panel.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+function renderCCChart(){
+  const m=calcCC();
+  const total=Object.values(m).reduce((a,b)=>a+b,0);
+  const sorted=Object.entries(m).sort((a,b)=>b[1]-a[1]);
+  const chart=document.getElementById('ccChart');
+  chart.innerHTML='';
+
+  sorted.forEach(([cc,val])=>{
+    const pct=(val/total*100).toFixed(1);
+    const col=getColor(cc);
+    const row=document.createElement('div');
+    row.className='cc-bar-row'+(activeCC===cc?' active':'');
+    row.dataset.cc=cc;
+    row.title=`Clic para ver colaboradores de ${cc}`;
+    row.onclick=()=>showCCPanel(cc,col);
+    row.innerHTML=`
+      <div class="cc-bar-label">
+        <span style="width:10px;height:10px;border-radius:50%;background:${col};display:inline-block;flex-shrink:0;"></span>${cc}
+      </div>
+      <div class="cc-bar-track">
+        <div class="cc-bar-fill" style="width:${pct}%;background:${col};">
+          <span class="cc-bar-val">${fmt(val)}</span>
+        </div>
+      </div>
+      <div class="cc-bar-pct">${pct}%</div>
+      <div class="cc-bar-count" style="width:56px;font-size:11px;color:#94a3b8;text-align:center;flex-shrink:0;">👆 ver</div>`;
+    chart.appendChild(row);
+  });
+
+  document.getElementById('ccLegend').innerHTML=sorted.map(([cc])=>
+    `<div class="cc-legend-item" style="cursor:pointer;" onclick="showCCPanel('${cc.replace(/'/g,"\\'")}','${getColor(cc)}')">
+      <div class="cc-dot" style="background:${getColor(cc)}"></div><span>${cc}</span></div>`).join('');
+
+  const ccLines=sorted.map(([cc,v])=>`<span><strong style="color:${getColor(cc)}">${cc}:</strong> ${fmt(v)} (${(v/total*100).toFixed(1)}%)</span>`).join(' &nbsp;·&nbsp; ');
+  document.getElementById('ccTotals').innerHTML=`
+    <div style="margin-bottom:6px;">${ccLines}</div>
+    <div><strong>Total verificado:</strong> ${fmt(total)} &nbsp;|&nbsp; <strong>${sorted.length} centros activos</strong> &nbsp;|&nbsp; Principal: <strong style="color:${getColor(sorted[0][0])}">${sorted[0][0]}</strong> (${(sorted[0][1]/total*100).toFixed(1)}%) &nbsp;·&nbsp; <span style="font-size:11px;color:#94a3b8;">💡 Clic en una barra para ver sus colaboradores</span></div>`;
+
+  if(activeCC){
+    const found=sorted.find(([cc])=>cc===activeCC);
+    if(found) showCCPanel(activeCC,getColor(activeCC));
+    else{document.getElementById('ccEmpPanel').classList.remove('open');activeCC=null;}
+  }
+}
+
+// Close multi-dropdowns on outside click
+document.addEventListener('click',()=>{
+  document.querySelectorAll('.cc-multi-dropdown.open').forEach(d=>d.classList.remove('open'));
+});
+
+// ── MODAL / APPROVAL ─────────────────────────────────────────────────────
+function openModal(){document.getElementById('approvalModal').classList.add('active');}
+function closeModal(){document.getElementById('approvalModal').classList.remove('active');}
+
+let approved=false;
+function confirmApproval(){
+  if(approved)return;approved=true;closeModal();
+  document.getElementById('approvalBox3').className='approval-box approved';
+  document.getElementById('approvalIcon3').textContent='✅';
+  document.getElementById('approvalTag3').textContent='✔ Aprobado — Gerencia General';
+  document.getElementById('approvalTag3').className='approval-tag tag-approved';
+  const now=new Date();
+  const ds=now.toLocaleString('es-CO',{day:'2-digit',month:'long',year:'numeric',hour:'2-digit',minute:'2-digit'});
+  document.getElementById('approvalDate3').innerHTML=`✅ Aprobado: ${ds}<br><strong style="color:#059669;">Desembolso autorizado: $36,163,801 COP</strong>`;
+  const btn=document.getElementById('approveBtn');
+  btn.className='btn-approve approved-btn';
+  btn.innerHTML='✅ Nómina Aprobada — Desembolso Autorizado';
+  btn.onclick=null;
+  showToast('✅ Nómina aprobada y autorizada para desembolso','#059669');
+}
+
+function showToast(msg,color){
+  const t=document.getElementById('toast');
+  t.innerHTML=msg;t.style.background=color||'#2165a8';
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),3000);
+}
+
+renderTable();
+renderCCChart();
+</script>
+</body>
+</html>
